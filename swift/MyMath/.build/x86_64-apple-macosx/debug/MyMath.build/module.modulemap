@@ -1,0 +1,4 @@
+module MyMath {
+    header "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/MyMath-Swift.h"
+    requires objc
+}

@@ -1,0 +1,4 @@
+module MyMathPackageTests {
+    header "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/MyMathPackageTests-Swift.h"
+    requires objc
+}

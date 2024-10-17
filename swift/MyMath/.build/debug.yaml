@@ -1,0 +1,112 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "MyMath-x86_64-apple-macosx15.0-debug.module": ["<MyMath-x86_64-apple-macosx15.0-debug.module>"]
+  "MyMathPackageTests-x86_64-apple-macosx15.0-debug.module": ["<MyMathPackageTests-x86_64-apple-macosx15.0-debug.module>"]
+  "MyMathPackageTests-x86_64-apple-macosx15.0-debug.test": ["<MyMathPackageTests-x86_64-apple-macosx15.0-debug.test>"]
+  "MyMathTests-x86_64-apple-macosx15.0-debug.module": ["<MyMathTests-x86_64-apple-macosx15.0-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<MyMath-x86_64-apple-macosx15.0-debug.module>"]
+  "test": ["<MyMath-x86_64-apple-macosx15.0-debug.module>","<MyMathPackageTests-x86_64-apple-macosx15.0-debug.test>","<MyMathTests-x86_64-apple-macosx15.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Sources/MyMath/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Tests/MyMathTests/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Sources/MyMath/MyMath.swift"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/sources"]
+    description: "Write auxiliary file /Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/sources"
+
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.derived/runner.swift"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/sources"]
+    description: "Write auxiliary file /Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/sources"
+
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.derived/runner.swift":
+    tool: test-entry-point-tool
+    inputs: []
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.derived/runner.swift"]
+
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/MyMath.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/runner.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/MyMathTests.swift.o"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.product/Objects.LinkFileList"
+
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Tests/MyMathTests/MyMathTests.swift"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/sources"]
+    description: "Write auxiliary file /Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/sources"
+
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<MyMath-x86_64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/MyMath.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMath.swiftmodule"]
+    outputs: ["<MyMath-x86_64-apple-macosx15.0-debug.module>"]
+
+  "<MyMathPackageTests-x86_64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/runner.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathPackageTests.swiftmodule"]
+    outputs: ["<MyMathPackageTests-x86_64-apple-macosx15.0-debug.module>"]
+
+  "<MyMathPackageTests-x86_64-apple-macosx15.0-debug.test>":
+    tool: phony
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.xctest/Contents/MacOS/MyMathPackageTests"]
+    outputs: ["<MyMathPackageTests-x86_64-apple-macosx15.0-debug.test>"]
+
+  "<MyMathTests-x86_64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/MyMathTests.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathTests.swiftmodule"]
+    outputs: ["<MyMathTests-x86_64-apple-macosx15.0-debug.module>"]
+
+  "C.MyMath-x86_64-apple-macosx15.0-debug.module":
+    tool: shell
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Sources/MyMath/MyMath.swift","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/sources"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/MyMath.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMath.swiftmodule"]
+    description: "Compiling Swift Module 'MyMath' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","MyMath","-emit-dependencies","-emit-module","-emit-module-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMath.swiftmodule","-output-file-map","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/sources","-I","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules","-target","x86_64-apple-macosx10.13","-enable-batch-mode","-index-store-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j16","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/MyMath-Swift.h","-color-diagnostics","-swift-version","6","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","mymath"]
+
+  "C.MyMathPackageTests-x86_64-apple-macosx15.0-debug.module":
+    tool: shell
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.derived/runner.swift","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathTests.swiftmodule","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/sources"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/runner.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathPackageTests.swiftmodule"]
+    description: "Compiling Swift Module 'MyMathPackageTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","MyMathPackageTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathPackageTests.swiftmodule","-output-file-map","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/sources","-I","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules","-target","x86_64-apple-macosx10.13","-enable-batch-mode","-index-store-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j16","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/MyMathPackageTests-Swift.h","-color-diagnostics","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","mymath"]
+
+  "C.MyMathPackageTests-x86_64-apple-macosx15.0-debug.test":
+    tool: shell
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMath.build/MyMath.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.build/runner.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/MyMathTests.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.product/Objects.LinkFileList"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.xctest/Contents/MacOS/MyMathPackageTests"]
+    description: "Linking ./.build/x86_64-apple-macosx/debug/MyMathPackageTests.xctest/Contents/MacOS/MyMathPackageTests"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug","-o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.xctest/Contents/MacOS/MyMathPackageTests","-module-name","MyMathPackageTests","-Xlinker","-no_warn_duplicate_libraries","-Xlinker","-bundle","-Xlinker","-rpath","-Xlinker","@loader_path/../../../","@/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathPackageTests.product/Objects.LinkFileList","-target","x86_64-apple-macosx13.0","-Xlinker","-add_ast_path","-Xlinker","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMath.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathPackageTests.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathTests.swiftmodule","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.MyMathTests-x86_64-apple-macosx15.0-debug.module":
+    tool: shell
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Tests/MyMathTests/MyMathTests.swift","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMath.swiftmodule","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/sources"]
+    outputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/MyMathTests.swift.o","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathTests.swiftmodule"]
+    description: "Compiling Swift Module 'MyMathTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","MyMathTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules/MyMathTests.swiftmodule","-output-file-map","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/sources","-I","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/Modules","-target","x86_64-apple-macosx13.0","-enable-batch-mode","-index-store-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j16","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-color-diagnostics","-swift-version","6","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","mymath"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Sources/MyMath/","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Tests/MyMathTests/","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Package.swift","/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

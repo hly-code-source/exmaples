@@ -1,0 +1,4 @@
+module MyMath {
+    header "MyMath.h"  // 包含的头文件
+    export *
+}

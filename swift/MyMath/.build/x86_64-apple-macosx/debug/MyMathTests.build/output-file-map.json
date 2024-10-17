@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/master.swiftdeps"
+  },
+  "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/Tests/MyMathTests/MyMathTests.swift": {
+    "dependencies": "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/MyMathTests.d",
+    "object": "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/MyMathTests.swift.o",
+    "swiftmodule": "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/MyMathTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/helinyu/workspace/GitHub/exmaples/swift/MyMath/.build/x86_64-apple-macosx/debug/MyMathTests.build/MyMathTests.swiftdeps"
+  }
+}

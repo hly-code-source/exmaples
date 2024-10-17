@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swift}/ExampleApp",
+            "name": "Debug ExampleApp (ExampleApp)",
+            "program": "${workspaceFolder:swift}/ExampleApp/.build/debug/ExampleApp",
+            "preLaunchTask": "swift: Build Debug ExampleApp (ExampleApp)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swift}/ExampleApp",
+            "name": "Release ExampleApp (ExampleApp)",
+            "program": "${workspaceFolder:swift}/ExampleApp/.build/release/ExampleApp",
+            "preLaunchTask": "swift: Build Release ExampleApp (ExampleApp)"
+        }
+    ]
+}
