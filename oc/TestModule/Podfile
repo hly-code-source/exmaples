@@ -1,0 +1,14 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '18.0'
+#use_frameworks!
+
+target 'TestModule' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_modular_headers!
+  pod "Person", :path => "./Person/"
+
+#  use_frameworks!
+#  pod 'YourLocalPod', :path => '../path_to_your_local_pod'
+  # Pods for TestModule
+
+end

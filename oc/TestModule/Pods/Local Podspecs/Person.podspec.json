@@ -1,0 +1,19 @@
+{
+  "name": "Person",
+  "version": "0.0.1",
+  "summary": "Person",
+  "description": "eaizer to use",
+  "homepage": "./",
+  "license": "MIT",
+  "platforms": {
+    "ios": "13.0"
+  },
+  "authors": {
+    "helinyu": "2319979647@qq.com"
+  },
+  "source": {
+    "git": "./",
+    "tag": "0.0.1"
+  },
+  "source_files": "*.{h,m}"
+}

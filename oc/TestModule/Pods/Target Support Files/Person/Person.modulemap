@@ -1,0 +1,6 @@
+module Person {
+  umbrella header "Person-umbrella.h"
+
+  export *
+  module * { export * }
+}
