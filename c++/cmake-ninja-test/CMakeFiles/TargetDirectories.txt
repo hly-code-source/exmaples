@@ -1,0 +1,3 @@
+/Users/helinyu/workspace/GitHub/exmaples/c++/cmake-ninja/CMakeFiles/hello.dir
+/Users/helinyu/workspace/GitHub/exmaples/c++/cmake-ninja/CMakeFiles/edit_cache.dir
+/Users/helinyu/workspace/GitHub/exmaples/c++/cmake-ninja/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/helinyu/workspace/GitHub/exmaples/c++/cmake-ninja/build",
+  "command": "/usr/bin/clang++ -g -std=gnu++11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -o CMakeFiles/hello.dir/main.cpp.o -c /Users/helinyu/workspace/GitHub/exmaples/c++/cmake-ninja/main.cpp",
+  "file": "/Users/helinyu/workspace/GitHub/exmaples/c++/cmake-ninja/main.cpp",
+  "output": "CMakeFiles/hello.dir/main.cpp.o"
+}
+]
