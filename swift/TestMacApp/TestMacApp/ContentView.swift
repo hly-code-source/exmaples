@@ -12,9 +12,14 @@ import VarExtension
 struct ContentView: View {
     var body: some View {
         VStack {
-            Button("你好点击我把") {
+            Button("保存图片") {
                 Task {
-                    await ScreenCapture().captureScreenImage()
+                    await ScreenCut().captureScreenImage()
+                }
+            }
+            Button("显示蒙版") {
+                Task {
+                    AppDelegate.shared.showAreaSelector(size: NSSize(width: 400, height: 200))
                 }
             }
         }
@@ -22,6 +27,6 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}

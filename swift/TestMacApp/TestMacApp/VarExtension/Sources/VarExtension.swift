@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FileKit
+import ScreenCaptureKit
 
 class VarExtension {
     

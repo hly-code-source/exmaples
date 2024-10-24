@@ -11,10 +11,12 @@
 		4A1A78E82CCA287700A228F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A1A78DF2CCA287700A228F8 /* Preview Assets.xcassets */; };
 		4A1A78E92CCA287700A228F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A1A78E12CCA287700A228F8 /* Assets.xcassets */; };
 		4A1A78EA2CCA287700A228F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E22CCA287700A228F8 /* ContentView.swift */; };
-		4A1A78EB2CCA287700A228F8 /* ScreenCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E32CCA287700A228F8 /* ScreenCapture.swift */; };
+		4A1A78EB2CCA287700A228F8 /* ScreenCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E32CCA287700A228F8 /* ScreenCut.swift */; };
 		4A1A78EC2CCA287700A228F8 /* TestMacAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E52CCA287700A228F8 /* TestMacAppApp.swift */; };
 		4A1A78ED2CCA287700A228F8 /* VarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E62CCA287700A228F8 /* VarExtension.swift */; };
 		4A1A78F72CCA297E00A228F8 /* VarExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4A1A78F62CCA297E00A228F8 /* VarExtension */; };
+		4A1A78FD2CCA38C900A228F8 /* ScreenSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */; };
+		4A1A78FF2CCA3C1F00A228F8 /* AreaSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,10 +24,12 @@
 		4A1A78DF2CCA287700A228F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4A1A78E12CCA287700A228F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A1A78E22CCA287700A228F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		4A1A78E32CCA287700A228F8 /* ScreenCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCapture.swift; sourceTree = "<group>"; };
+		4A1A78E32CCA287700A228F8 /* ScreenCut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCut.swift; sourceTree = "<group>"; };
 		4A1A78E42CCA287700A228F8 /* TestMacApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestMacApp.entitlements; sourceTree = "<group>"; };
 		4A1A78E52CCA287700A228F8 /* TestMacAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMacAppApp.swift; sourceTree = "<group>"; };
 		4A1A78E62CCA287700A228F8 /* VarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarExtension.swift; sourceTree = "<group>"; };
+		4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSelector.swift; sourceTree = "<group>"; };
+		4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +76,9 @@
 				4A1A78E02CCA287700A228F8 /* Preview Content */,
 				4A1A78E12CCA287700A228F8 /* Assets.xcassets */,
 				4A1A78E22CCA287700A228F8 /* ContentView.swift */,
-				4A1A78E32CCA287700A228F8 /* ScreenCapture.swift */,
+				4A1A78E32CCA287700A228F8 /* ScreenCut.swift */,
+				4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */,
+				4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */,
 				4A1A78E42CCA287700A228F8 /* TestMacApp.entitlements */,
 				4A1A78E52CCA287700A228F8 /* TestMacAppApp.swift */,
 			);
@@ -175,7 +181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A1A78EA2CCA287700A228F8 /* ContentView.swift in Sources */,
-				4A1A78EB2CCA287700A228F8 /* ScreenCapture.swift in Sources */,
+				4A1A78FD2CCA38C900A228F8 /* ScreenSelector.swift in Sources */,
+				4A1A78EB2CCA287700A228F8 /* ScreenCut.swift in Sources */,
+				4A1A78FF2CCA3C1F00A228F8 /* AreaSelector.swift in Sources */,
 				4A1A78EC2CCA287700A228F8 /* TestMacAppApp.swift in Sources */,
 				4A1A78ED2CCA287700A228F8 /* VarExtension.swift in Sources */,
 			);
