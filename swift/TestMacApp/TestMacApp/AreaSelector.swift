@@ -150,7 +150,6 @@ struct resizeView: View {
     }
     
     func resize() {
-//        appDelegate.closeAllWindow(except: "Start Recording")
         AppDelegate.shared.showAreaSelector(size: NSSize(width: areaWidth, height: areaHeight), noPanel: true)
     }
 }
@@ -260,11 +259,12 @@ struct AreaSelector: View {
         let display: SCDisplay = displays.first!
         let contentFilter = SCContentFilter(display: display, excludingWindows: [])
         let configuration = SCStreamConfiguration()
-//        configuration.sourceRect = NSRectToCGRect(ScreenCut.screenArea!);
-//        configuration.destinationRect = NSRectToCGRect(ScreenCut.screenArea!);
-//        configuration.frame = NSRectToCGRect(ScreenCut.screenArea!);
-        configuration.sourceRect = NSRectToCGRect(ScreenCut.screenArea!)
-        configuration.destinationRect = NSRectToCGRect(ScreenCut.screenArea!)
+        
+           // 翻转 Y 坐标
+        let flippedY = CGFloat(display.height) - ScreenCut.screenArea!.origin.y - ScreenCut.screenArea!.size.height
+        configuration.sourceRect = CGRectMake( ScreenCut.screenArea!.origin.x, flippedY, ScreenCut.screenArea!.size.width, ScreenCut.screenArea!.size.height)
+        configuration.destinationRect = CGRectMake( ScreenCut.screenArea!.origin.x, flippedY, ScreenCut.screenArea!.size.width, ScreenCut.screenArea!.size.height)
+
         SCScreenshotManager.captureImage(contentFilter: contentFilter, configuration: configuration) { image, error in
             print("lt -- image : eror : %@", error.debugDescription)
             guard let img = image else {
@@ -273,26 +273,6 @@ struct AreaSelector: View {
             }
             ScreenCut.saveImageToFile(img)
         }
-        
-//        appDelegate.closeAllWindow()
-//        appDelegate.stopGlobalMouseMonitor()
-//        var window = NSWindow()
-//        let area = SCContext.screenArea!
-//        guard let nsScreen = screen.nsScreen else { return }
-//        let frame = NSRect(x: Int(area.origin.x + nsScreen.frame.minX - 5), y: Int(area.origin.y + nsScreen.frame.minY - 5), width: Int(area.width + 10), height: Int(area.height + 10))
-//        window = NSWindow(contentRect: frame, styleMask: [.fullSizeContentView], backing: .buffered, defer: false)
-//        window.hasShadow = false
-//        window.level = .screenSaver
-//        window.ignoresMouseEvents = true
-//        window.isReleasedWhenClosed = false
-//        window.title = "Area Overlayer"
-//        window.backgroundColor = NSColor.clear
-//        window.contentView = NSHostingView(rootView: DashWindow())
-//        window.orderFront(self)
-//        appDelegate.createCountdownPanel(screen: screen) {
-//            SCContext.autoStop = autoStop
-//            appDelegate.prepRecord(type: "area", screens: screen, windows: nil, applications: nil)
-//        }
     }
 }
 
@@ -326,12 +306,12 @@ class ScreenshotOverlayView: NSView {
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
         selectionRect = NSRect(x: (self.frame.width - size.width) / 2, y: (self.frame.height - size.height) / 2, width: size.width, height:size.height)
-//        if !force {
+        if !force {
 //            let savedArea = UserDefaults.standard.object(forKey: "savedArea") as! [String: [String: CGFloat]]
 //            if let name = self.window?.screen?.localizedName { if let area = savedArea[name] {
 //                selectionRect = NSRect(x: area["x"]!, y: area["y"]!, width: area["width"]!, height: area["height"]!)
 //            }}
-//        }
+        }
         if self.window != nil {
             areaWidth = Int(selectionRect!.width)
             areaHeight = Int(selectionRect!.height)
@@ -499,6 +479,7 @@ class ScreenshotOverlayView: NSView {
     
     override func mouseUp(with event: NSEvent) {
         print("lt -- mouseUp : \(event)")
+        ScreenCut.screenArea = selectionRect
         initialLocation = nil
         activeHandle = .none
         dragIng = false

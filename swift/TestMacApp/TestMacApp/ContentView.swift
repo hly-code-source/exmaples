@@ -19,14 +19,10 @@ struct ContentView: View {
             }
             Button("显示蒙版") {
                 Task {
-                    AppDelegate.shared.showAreaSelector(size: NSSize(width: 400, height: 200))
+                    AppDelegate.shared.showAreaSelector(size: NSSize(width: 600, height: 450))
                 }
             }
         }
         .padding()
     }
 }
-
-//#Preview {
-//    ContentView()
-//}
