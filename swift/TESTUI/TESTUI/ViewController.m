@@ -15,6 +15,20 @@
 
 @implementation ViewController
 
+-(void)test {
+    NSLog(@"2");
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    NSThread *thread = [[NSThread alloc] initWithBlock:^{
+        NSLog(@"1");
+    }];
+    [thread start];
+    [self performSelector:@selector(test) onThread:thread withObject:nil waitUntilDone:YES];
+    [self performSelector:@selector(test) onThread:thread withObject:nil waitUntilDone:YES modes:@[]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
