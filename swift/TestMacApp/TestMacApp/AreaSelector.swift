@@ -88,22 +88,6 @@ class AppDelegate  {
 
 }
 
-struct DashWindow: View {
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(Color.clear)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-                        .padding(1)
-                        .foregroundColor(.blue.opacity(0.5))
-                )
-        }
-    }
-}
-
-
 struct resizeView: View {
     private enum Field: Int, Hashable { case width, height }
     @FocusState private var focusedField: Field?
@@ -202,7 +186,6 @@ struct AreaSelector: View {
                         }.padding()
                     })
                     Spacer()
-//                    OptionsView().padding(.leading, 18)
                     Spacer()
                     Button(action: {
                         isPopoverShowing = true
@@ -552,7 +535,6 @@ class ScreenshotOverlayView: NSView {
         initialLocation = nil
         activeHandle = .none
         dragIng = false
-        self.resetCursorRects()
         isMouseUp = true
         needsDisplay = true
         showEditCutBottomView()
@@ -564,7 +546,7 @@ class ScreenshotOverlayView: NSView {
     func showEditCutBottomView() {
         if (areaPannel == nil) {
             let contentView = NSHostingView(rootView: EditCutBottomView())
-            contentView.frame = NSRect(x: selectionRect!.origin.x + selectionRect!.size.width - 340 , y:selectionRect!.origin.y - 50, width: contentView.frame.size.width, height: contentView.frame.size.height)
+            contentView.frame = NSRect(x: selectionRect!.origin.x + selectionRect!.size.width - 340 , y:selectionRect!.origin.y - 90, width: contentView.frame.size.width, height: contentView.frame.size.height)
             contentView.focusRingType = .none
            
             let areaPanel = NSPanel(contentRect: contentView.frame, styleMask: [.fullSizeContentView, .nonactivatingPanel], backing: .buffered, defer: false)
@@ -653,21 +635,7 @@ class ScreenshotOverlayView: NSView {
         print("lt -- mouseExited")
         
     }
-    
-    override func resetCursorRects() {
-        super.resetCursorRects()
-//        print("lt xx resetCursorRects : \(String(describing: self.selectionRect))")
-//        removeCursorRect(self.selectionRect!, cursor: NSCursor.crosshair)
-//        addCursorRect(self.selectionRect!, cursor: NSCursor.closedHand)
-    }
-    
-//    override func pressureChange(with event: NSEvent) {
-//        print("lt -- pressureChange")
-//    }
 }
-
-
-
 
 class ScreenshotWindow: NSPanel {
     

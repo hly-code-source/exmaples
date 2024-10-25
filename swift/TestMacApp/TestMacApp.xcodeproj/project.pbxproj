@@ -13,7 +13,6 @@
 		4A1A78EB2CCA287700A228F8 /* ScreenCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E32CCA287700A228F8 /* ScreenCut.swift */; };
 		4A1A78EC2CCA287700A228F8 /* TestMacAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E52CCA287700A228F8 /* TestMacAppApp.swift */; };
 		4A1A78ED2CCA287700A228F8 /* VarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E62CCA287700A228F8 /* VarExtension.swift */; };
-		4A1A78FD2CCA38C900A228F8 /* ScreenSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */; };
 		4A1A78FF2CCA3C1F00A228F8 /* AreaSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */; };
 		4AE56BF42CCB966900E319D1 /* FileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4AE56BF32CCB966900E319D1 /* FileKit */; };
 		4AE56BF82CCBA30800E319D1 /* EditCutBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE56BF72CCBA30800E319D1 /* EditCutBottomView.swift */; };
@@ -28,7 +27,6 @@
 		4A1A78E42CCA287700A228F8 /* TestMacApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestMacApp.entitlements; sourceTree = "<group>"; };
 		4A1A78E52CCA287700A228F8 /* TestMacAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMacAppApp.swift; sourceTree = "<group>"; };
 		4A1A78E62CCA287700A228F8 /* VarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarExtension.swift; sourceTree = "<group>"; };
-		4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSelector.swift; sourceTree = "<group>"; };
 		4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelector.swift; sourceTree = "<group>"; };
 		4AE56BF72CCBA30800E319D1 /* EditCutBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCutBottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,7 +75,6 @@
 				4A1A78E22CCA287700A228F8 /* ContentView.swift */,
 				4A1A78E32CCA287700A228F8 /* ScreenCut.swift */,
 				4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */,
-				4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */,
 				4AE56BF72CCBA30800E319D1 /* EditCutBottomView.swift */,
 				4A1A78E62CCA287700A228F8 /* VarExtension.swift */,
 				4A1A78E42CCA287700A228F8 /* TestMacApp.entitlements */,
@@ -166,7 +163,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A1A78EA2CCA287700A228F8 /* ContentView.swift in Sources */,
-				4A1A78FD2CCA38C900A228F8 /* ScreenSelector.swift in Sources */,
 				4A1A78EB2CCA287700A228F8 /* ScreenCut.swift in Sources */,
 				4A1A78FF2CCA3C1F00A228F8 /* AreaSelector.swift in Sources */,
 				4A1A78EC2CCA287700A228F8 /* TestMacAppApp.swift in Sources */,
