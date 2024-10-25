@@ -70,6 +70,7 @@ class AppDelegate  {
             contentView.layer?.backgroundColor = NSColor.red.cgColor
             contentView.frame = NSRect(x: wX, y: wY, width: 780, height: 110)
             contentView.focusRingType = .none
+           
             let areaPanel = NSPanel(contentRect: contentView.frame, styleMask: [.fullSizeContentView, .nonactivatingPanel], backing: .buffered, defer: false)
             areaPanel.collectionBehavior = [.canJoinAllSpaces]
             areaPanel.setFrame(contentView.frame, display: true)
@@ -284,14 +285,17 @@ class ScreenshotOverlayView: NSView {
     var initialLocation: NSPoint?
     var maskLayer: CALayer?
     var dragIng: Bool = false
-    var activeHandle: ResizeHandle = .none
+    var activeHandle: ResizeHandle = .none // 是否重新设置大小
     var lastMouseLocation: NSPoint?
     var maxFrame: NSRect?
     var size: NSSize
     var force: Bool
+    
+    var sizeTipsView: NSPanel?
 
     let controlPointSize: CGFloat = 10.0
     let controlPointColor: NSColor = NSColor.systemYellow
+    var isMouseUp: Bool = true
     
     init(frame: CGRect, size: NSSize, force: Bool) {
         self.size = size
@@ -305,6 +309,13 @@ class ScreenshotOverlayView: NSView {
     
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
+        
+        let trackingArea = NSTrackingArea(rect: self.bounds,
+                                          options: [.mouseEnteredAndExited, .mouseMoved, .cursorUpdate, .activeInActiveApp],
+                                                  owner: self,
+                                                  userInfo: nil)
+       self.addTrackingArea(trackingArea)
+        
         selectionRect = NSRect(x: (self.frame.width - size.width) / 2, y: (self.frame.height - size.height) / 2, width: size.width, height:size.height)
         if !force {
 //            let savedArea = UserDefaults.standard.object(forKey: "savedArea") as! [String: [String: CGFloat]]
@@ -317,6 +328,7 @@ class ScreenshotOverlayView: NSView {
             areaHeight = Int(selectionRect!.height)
             ScreenCut.screenArea = selectionRect
         }
+        
     }
     
     override func draw(_ dirtyRect: NSRect) {
@@ -345,11 +357,67 @@ class ScreenshotOverlayView: NSView {
                 }
             }
         }
+        
+        if (!self.isMouseUp) {
+            // 创建要绘制的文本
+            let text = "\(Int(self.selectionRect!.size.width))" + " x " + "\(Int(self.selectionRect!.size.height))"
+            let attributes: [NSAttributedString.Key: Any] = [
+               .font: NSFont.systemFont(ofSize: 12),
+               .foregroundColor: NSColor.black
+            ]
+
+            // 计算文本的大小
+            let textSize = (text as NSString).size(withAttributes: attributes)
+
+            // 计算绘制文本的起始位置
+            var tipX = NSEvent.mouseLocation.x
+            var tipY = NSEvent.mouseLocation.y
+            let bgH = textSize.height + 10
+            let bgW = textSize.width + 10
+            let deta: Double = 6.0
+            switch activeHandle {
+            case .topLeft, .top:
+                tipX = tipX - bgW - deta
+                tipY = tipY + deta
+            case .topRight:
+                tipX = tipX + deta + deta
+                tipY = tipY + deta
+            case .right:
+                tipX = tipX + deta + deta
+                tipY = tipY + deta
+            case .bottomRight, .bottom:
+                tipX = tipX + deta + deta
+                tipY = tipY - bgH - deta
+            case .bottomLeft:
+                tipX = tipX - bgW
+                tipY = tipY - bgH - deta
+            case .left:
+                tipX = tipX - bgW - deta
+                tipY = tipY + deta
+            case .none: break
+                
+            }
+            let textRect = CGRect(
+                x: tipX,
+                y: tipY,
+               width: textSize.width,
+               height: textSize.height
+            )
+
+            // 绘制白色背景块
+            let backgroundRect = textRect.insetBy(dx: -6, dy: -5) // 增加一些边距
+            let cornerRadius: CGFloat = 4.0 // 圆角半径
+            let path = NSBezierPath(roundedRect: backgroundRect, xRadius: cornerRadius, yRadius: cornerRadius)
+            NSColor.white.withAlphaComponent(0.7).setFill() // 设置透明度
+            path.fill() // 填充背景
+
+            // 绘制文本
+            (text as NSString).draw(in: textRect, withAttributes: attributes)
+        }
     }
     
     func handleForPoint(_ point: NSPoint) -> ResizeHandle {
         guard let rect = selectionRect else { return .none }
-        
         for handle in ResizeHandle.allCases {
             if let controlPoint = controlPointForHandle(handle, inRect: rect), NSRect(origin: controlPoint, size: CGSize(width: controlPointSize, height: controlPointSize)).contains(point) {
                 return handle
@@ -381,22 +449,10 @@ class ScreenshotOverlayView: NSView {
         }
     }
     
-    override func mouseDown(with event: NSEvent) {
-        print("lt -- mouseDown : \(event)")
-        let location = convert(event.locationInWindow, from: nil)
-        initialLocation = location
-        lastMouseLocation = location
-        activeHandle = handleForPoint(location)
-        if let rect = selectionRect, NSPointInRect(location, rect) { dragIng = true }
-        needsDisplay = true
-    }
-    
     override func mouseDragged(with event: NSEvent) {
-        print("lt -- mouseDragged : \(event)")
         guard var initialLocation = initialLocation else { return }
-        let currentLocation = convert(event.locationInWindow, from: nil)
+        let currentLocation = event.locationInWindow
         if activeHandle != .none {
-            
             // Calculate new rectangle size and position
             var newRect = selectionRect ?? CGRect.zero
             
@@ -457,7 +513,6 @@ class ScreenshotOverlayView: NSView {
                 self.selectionRect?.origin.y = min(max(0.0, y! + deltaY), self.frame.height - h!)
                 initialLocation = currentLocation
             } else {
-                //dragIng = false
                 // 创建新矩形
                 guard let maxFrame = maxFrame else { return }
                 let origin = NSPoint(x: max(maxFrame.origin.x, min(initialLocation.x, currentLocation.x)), y: max(maxFrame.origin.y, min(initialLocation.y, currentLocation.y)))
@@ -469,7 +524,6 @@ class ScreenshotOverlayView: NSView {
                 self.selectionRect = NSIntersectionRect(maxFrame, NSRect(origin: origin, size: size))
                 areaWidth = Int(selectionRect!.width)
                 areaHeight = Int(selectionRect!.height)
-                //initialLocation = currentLocation
             }
             self.initialLocation = initialLocation
         }
@@ -477,14 +531,143 @@ class ScreenshotOverlayView: NSView {
         needsDisplay = true
     }
     
+    override func mouseDown(with event: NSEvent) {
+        print("lt -- mouseDown")
+        let location = convert(event.locationInWindow, from: nil)
+        initialLocation = location
+        lastMouseLocation = location
+        activeHandle = handleForPoint(location)
+        if let rect = selectionRect, NSPointInRect(location, rect) { dragIng = true }
+        isMouseUp = false
+        needsDisplay = true
+        if let pannel = self.areaPannel {
+            pannel.orderBack(nil)
+            pannel.setIsVisible(false)
+        }
+    }
+    
     override func mouseUp(with event: NSEvent) {
-        print("lt -- mouseUp : \(event)")
+        print("lt -- mouseUp ")
         ScreenCut.screenArea = selectionRect
         initialLocation = nil
         activeHandle = .none
         dragIng = false
+        self.resetCursorRects()
+        isMouseUp = true
+        needsDisplay = true
+        showEditCutBottomView()
     }
+    
+
+    var areaPannel: NSPanel?
+    
+    func showEditCutBottomView() {
+        if (areaPannel == nil) {
+            let contentView = NSHostingView(rootView: EditCutBottomView())
+            contentView.frame = NSRect(x: selectionRect!.origin.x + selectionRect!.size.width - 340 , y:selectionRect!.origin.y - 50, width: contentView.frame.size.width, height: contentView.frame.size.height)
+            contentView.focusRingType = .none
+           
+            let areaPanel = NSPanel(contentRect: contentView.frame, styleMask: [.fullSizeContentView, .nonactivatingPanel], backing: .buffered, defer: false)
+            areaPanel.collectionBehavior = [.canJoinAllSpaces]
+            areaPanel.setFrame(contentView.frame, display: true)
+            areaPanel.level = .screenSaver
+            areaPanel.title = "编辑图片"
+            areaPanel.contentView = contentView
+            areaPanel.backgroundColor = .clear
+            areaPanel.titleVisibility = .hidden
+            areaPanel.isReleasedWhenClosed = false
+            areaPanel.titlebarAppearsTransparent = true
+            areaPanel.isMovableByWindowBackground = true
+            areaPanel.orderFront(self)
+            self.areaPannel =  areaPanel
+        }
+        else {
+            self.areaPannel!.setFrameOrigin(NSMakePoint(selectionRect!.origin.x + selectionRect!.size.width - 340 , selectionRect!.origin.y - 50))
+            self.areaPannel!.orderFront(self)
+        }
+        self.areaPannel!.setIsVisible(true)
+
+    }
+    
+    override func mouseMoved(with event: NSEvent) {
+        
+        let curlocation = event.locationInWindow
+        activeHandle = handleForPoint(curlocation)
+        
+        if (activeHandle != .none) {
+            if #available(macOS 15.0, *) {
+                switch activeHandle {
+                case .top, .bottom:
+                    NSCursor.frameResize(position: .top, directions: [.inward, .outward]).set()
+                case .left, .right:
+                    NSCursor.frameResize(position: .left, directions: [.inward, .outward]).set()
+                case .topLeft, .bottomRight:
+                    NSCursor.frameResize(position: .topLeft, directions: [.inward, .outward]).set()
+                case .topRight, .bottomLeft:
+                    NSCursor.frameResize(position: .topRight, directions: [.inward, .outward]).set()
+                default:
+                    break
+                }
+                
+            } else {
+                // Fallback on earlier versions
+                    switch activeHandle {
+                    case .topLeft:
+                        NSCursor.resizeLeftRight.set()
+                    case .top:
+                        NSCursor.resizeUpDown.set()
+                    case .topRight:
+                        NSCursor.resizeUpDown.set()
+                    case .right:
+                        NSCursor.resizeLeftRight.set()
+                    case .bottomRight:
+                        NSCursor.resizeUpDown.set()
+                    case .bottom:
+                        NSCursor.resizeUpDown.set()
+                    case .bottomLeft:
+                        NSCursor.resizeLeftRight.set()
+                    case .left:
+                        NSCursor.resizeLeftRight.set()
+                    default:
+                        break
+                    }
+            }
+            
+        }
+        else {
+            if (self.selectionRect!.contains(curlocation)) {
+                    NSCursor.closedHand.set()
+            }
+            else {
+                NSCursor.crosshair.set()
+            }
+        }
+    }
+    
+    override func mouseEntered(with event: NSEvent) {
+        print("lt -- mouseEntered")
+        NSCursor.crosshair.set()
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+        print("lt -- mouseExited")
+        
+    }
+    
+    override func resetCursorRects() {
+        super.resetCursorRects()
+//        print("lt xx resetCursorRects : \(String(describing: self.selectionRect))")
+//        removeCursorRect(self.selectionRect!, cursor: NSCursor.crosshair)
+//        addCursorRect(self.selectionRect!, cursor: NSCursor.closedHand)
+    }
+    
+//    override func pressureChange(with event: NSEvent) {
+//        print("lt -- pressureChange")
+//    }
 }
+
+
+
 
 class ScreenshotWindow: NSPanel {
     

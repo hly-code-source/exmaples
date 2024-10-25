@@ -1,7 +1,6 @@
 import ScreenCaptureKit
 import Cocoa
 import FileKit
-import VarExtension
 import SwiftUI
 
 class ScreenCut {

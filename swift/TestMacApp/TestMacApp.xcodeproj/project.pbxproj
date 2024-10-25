@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A1A78B12CCA065000A228F8 /* FileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4A1A78B02CCA065000A228F8 /* FileKit */; };
 		4A1A78E82CCA287700A228F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A1A78DF2CCA287700A228F8 /* Preview Assets.xcassets */; };
 		4A1A78E92CCA287700A228F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A1A78E12CCA287700A228F8 /* Assets.xcassets */; };
 		4A1A78EA2CCA287700A228F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E22CCA287700A228F8 /* ContentView.swift */; };
 		4A1A78EB2CCA287700A228F8 /* ScreenCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E32CCA287700A228F8 /* ScreenCut.swift */; };
 		4A1A78EC2CCA287700A228F8 /* TestMacAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E52CCA287700A228F8 /* TestMacAppApp.swift */; };
 		4A1A78ED2CCA287700A228F8 /* VarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78E62CCA287700A228F8 /* VarExtension.swift */; };
-		4A1A78F72CCA297E00A228F8 /* VarExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4A1A78F62CCA297E00A228F8 /* VarExtension */; };
 		4A1A78FD2CCA38C900A228F8 /* ScreenSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */; };
 		4A1A78FF2CCA3C1F00A228F8 /* AreaSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */; };
+		4AE56BF42CCB966900E319D1 /* FileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4AE56BF32CCB966900E319D1 /* FileKit */; };
+		4AE56BF82CCBA30800E319D1 /* EditCutBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE56BF72CCBA30800E319D1 /* EditCutBottomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +30,7 @@
 		4A1A78E62CCA287700A228F8 /* VarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarExtension.swift; sourceTree = "<group>"; };
 		4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSelector.swift; sourceTree = "<group>"; };
 		4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelector.swift; sourceTree = "<group>"; };
+		4AE56BF72CCBA30800E319D1 /* EditCutBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCutBottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,8 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A1A78F72CCA297E00A228F8 /* VarExtension in Frameworks */,
-				4A1A78B12CCA065000A228F8 /* FileKit in Frameworks */,
+				4AE56BF42CCB966900E319D1 /* FileKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,33 +72,18 @@
 		4A1A78E72CCA287700A228F8 /* TestMacApp */ = {
 			isa = PBXGroup;
 			children = (
-				4A1A78EE2CCA287A00A228F8 /* VarExtension */,
 				4A1A78E02CCA287700A228F8 /* Preview Content */,
 				4A1A78E12CCA287700A228F8 /* Assets.xcassets */,
 				4A1A78E22CCA287700A228F8 /* ContentView.swift */,
 				4A1A78E32CCA287700A228F8 /* ScreenCut.swift */,
 				4A1A78FE2CCA3C1F00A228F8 /* AreaSelector.swift */,
 				4A1A78FC2CCA38C900A228F8 /* ScreenSelector.swift */,
+				4AE56BF72CCBA30800E319D1 /* EditCutBottomView.swift */,
+				4A1A78E62CCA287700A228F8 /* VarExtension.swift */,
 				4A1A78E42CCA287700A228F8 /* TestMacApp.entitlements */,
 				4A1A78E52CCA287700A228F8 /* TestMacAppApp.swift */,
 			);
 			path = TestMacApp;
-			sourceTree = "<group>";
-		};
-		4A1A78EE2CCA287A00A228F8 /* VarExtension */ = {
-			isa = PBXGroup;
-			children = (
-				4A1A78F12CCA28EE00A228F8 /* Sources */,
-			);
-			path = VarExtension;
-			sourceTree = "<group>";
-		};
-		4A1A78F12CCA28EE00A228F8 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				4A1A78E62CCA287700A228F8 /* VarExtension.swift */,
-			);
-			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,8 +103,8 @@
 			);
 			name = TestMacApp;
 			packageProductDependencies = (
-				4A1A78B02CCA065000A228F8 /* FileKit */,
 				4A1A78F62CCA297E00A228F8 /* VarExtension */,
+				4AE56BF32CCB966900E319D1 /* FileKit */,
 			);
 			productName = TestMacApp;
 			productReference = 4A1A789B2CC9EDDE00A228F8 /* TestMacApp.app */;
@@ -150,8 +135,8 @@
 			mainGroup = 4A1A78922CC9EDDE00A228F8;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				4A1A78AF2CCA065000A228F8 /* XCRemoteSwiftPackageReference "FileKit" */,
 				4A1A78F52CCA297E00A228F8 /* XCLocalSwiftPackageReference "TestMacApp/VarExtension" */,
+				4AE56BF22CCB966900E319D1 /* XCRemoteSwiftPackageReference "FileKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4A1A789C2CC9EDDE00A228F8 /* Products */;
@@ -186,6 +171,7 @@
 				4A1A78FF2CCA3C1F00A228F8 /* AreaSelector.swift in Sources */,
 				4A1A78EC2CCA287700A228F8 /* TestMacAppApp.swift in Sources */,
 				4A1A78ED2CCA287700A228F8 /* VarExtension.swift in Sources */,
+				4AE56BF82CCBA30800E319D1 /* EditCutBottomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,7 +379,7 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4A1A78AF2CCA065000A228F8 /* XCRemoteSwiftPackageReference "FileKit" */ = {
+		4AE56BF22CCB966900E319D1 /* XCRemoteSwiftPackageReference "FileKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nvzqz/FileKit";
 			requirement = {
@@ -404,14 +390,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4A1A78B02CCA065000A228F8 /* FileKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4A1A78AF2CCA065000A228F8 /* XCRemoteSwiftPackageReference "FileKit" */;
-			productName = FileKit;
-		};
 		4A1A78F62CCA297E00A228F8 /* VarExtension */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VarExtension;
+		};
+		4AE56BF32CCB966900E319D1 /* FileKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AE56BF22CCB966900E319D1 /* XCRemoteSwiftPackageReference "FileKit" */;
+			productName = FileKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
