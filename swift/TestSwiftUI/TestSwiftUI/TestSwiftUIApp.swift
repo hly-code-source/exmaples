@@ -2,7 +2,7 @@
 //  TestSwiftUIApp.swift
 //  TestSwiftUI
 //
-//  Created by helinyu on 2024/10/23.
+//  Created by helinyu on 2024/11/17.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct TestSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            OverlayerView()
+            ContentView()
         }
     }
 }

@@ -2,48 +2,6 @@ import SwiftUI
 import Cocoa
 import UserNotifications
 
-struct ContentView: View {
-
-    var body: some View {
-        HStack {
-            Button(action: {
-//                AppDelegate.showAreaSelector()
-            }, label: {
-                VStack{
-                    Image(systemName: "record.circle.fill")
-                        .font(.system(size: 36))
-                        .foregroundStyle(.red)
-                    Text("Start")
-                        .foregroundStyle(.secondary)
-                        .font(.system(size: 12))
-                }
-            }).buttonStyle(.plain)
-            
-            Button(action: {
-//                AppDelegate.showAreaSelector()
-            }, label: {
-                VStack{
-                    Image(systemName: "record.circle.fill")
-                        .font(.system(size: 36))
-                        .foregroundStyle(.red)
-                    Text("关闭")
-                        .foregroundStyle(.secondary)
-                        .font(.system(size: 12))
-                }
-            }).buttonStyle(.plain)
-        }
-        .frame(width: 400, height: 400)
-    }
-}
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
-
-var rootWindow : ScreenshotWindow?
-
 @main
 struct MyApp: App {
         
@@ -54,23 +12,13 @@ struct MyApp: App {
     var body: some Scene {
         MenuBarExtra("", systemImage: "record.circle.fill"){
             Button("选择截屏") {
-                rootWindow = ScreenshotWindow()
-                rootWindow!.makeKeyAndOrderFront(nil)
+                let rootWindow = ScreenshotWindow()
+                rootWindow.makeKeyAndOrderFront(nil)
+                rootWindow.becomeKey()
+//                rootWindow.makeKey()
+                rootWindow.viewsNeedDisplay = true
             }
             .keyboardShortcut("x", modifiers: [.control])
-            .padding()
-            Divider()
-            Button("在View上编辑") {
-//                OverlayWindowController().showWindow(NSScreen.main)
-                // 添加进去新的子view
-                
-//                let subLay =  ScreenshotCircleOverlayView(frame: self.selectionRect!, size:NSSize.zero)
-//                subLay.fillOverLayeralpha = 0.2
-//                self.addSubview(subLay)
-//                subLay.wantsLayer = true;
-//                subLay.layer?.masksToBounds = true
-            }
-            .keyboardShortcut("c", modifiers: [.control])
             .padding()
             Divider()
             Button("退出") {

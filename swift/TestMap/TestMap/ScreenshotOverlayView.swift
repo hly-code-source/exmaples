@@ -17,12 +17,9 @@ class ScreenshotOverlayView: NSView {
     var fillOverLayeralpha: CGFloat = 0.5 // 默认值
     var editViewFinshed: Bool = false // 默认是编辑当前的页面
     var cutSelectedItem : EditCutBottomShareModel = EditCutBottomShareModel()
-
-   
     
     init(frame: CGRect, size: NSSize, _ editCutSecondItem : EditCutSecondShowModel = EditCutSecondShowModel()) {
         self.size = size
-        self.editCutSecondItem = editCutSecondItem;
         super.init(frame: frame)
         
         
@@ -41,7 +38,6 @@ class ScreenshotOverlayView: NSView {
         self.editViewFinshed = true
         editViewFinshed = true
         needsDisplay = true
-        self.addCustomSubviews()
     }
     
     @objc func handleColorNotification(_ notification: Notification) {
@@ -64,45 +60,24 @@ class ScreenshotOverlayView: NSView {
         subView.lineWidth = self.cutSelectedItem.sizeValue
     }
     
-    func addCustomSubviews() {
-        var subView: OverlayProtocol?
-        switch self.cutSelectedItem.cutType {
-        case .square:
-            subView = ScreenshotRectangleOverlayView(frame: self.selectionRect!, size:NSSize.zero)
-        case .circle:
-            subView = ScreenshotCircleOverlayView(frame: self.selectionRect!, size:NSSize.zero)
-        case .arrow:
-            subView = ScreenshotArrowOverlayView(frame: self.selectionRect!, size:NSSize.zero)
-        case .doodle:
-            subView = ScreenshotDoodleView(frame: self.selectionRect!, size:NSSize.zero)
-        case .text:
-            subView = ScreenshotTextView(frame: self.selectionRect!, size:NSSize.zero)
-        default:
-            break
-        }
-        guard subView != nil else {
-            return
-        }
-
-        let curView:NSView = subView as! NSView
-        self.addSubview(curView)
-        curView.wantsLayer = true;
-        curView.layer?.masksToBounds = true
-        self.configSubViewAttr(curView)
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
-        let trackingArea = NSTrackingArea(rect: self.bounds,
-                                          options: [.mouseEnteredAndExited, .mouseMoved, .cursorUpdate, .activeInActiveApp],
-                                          owner: self,
-                                          userInfo: nil)
-        self.addTrackingArea(trackingArea)
-        selectionRect = NSRect(x: (self.frame.width - size.width) / 2, y: (self.frame.height - size.height) / 2, width: size.width, height:size.height)
+        if self.window != nil {
+            let trackingArea = NSTrackingArea(rect: self.bounds,
+                                              options: [.mouseEnteredAndExited, .mouseMoved, .cursorUpdate, .activeInActiveApp],
+                                              owner: self,
+                                              userInfo: nil)
+            self.addTrackingArea(trackingArea)
+            selectionRect = NSRect(x: (self.frame.width - size.width) / 2, y: (self.frame.height - size.height) / 2, width: size.width, height:size.height)
+            print("lt -- self frame:\(self.frame) selectionRect:\(String(describing: self.selectionRect))")
+            self.needsDisplay = true
+            NSCursor.crosshair.set()
+            self.becomeFirstResponder()
+        }
     }
     
     override func draw(_ dirtyRect: NSRect) {
@@ -254,11 +229,7 @@ class ScreenshotOverlayView: NSView {
     
 //     点击按钮下去的时候
     override func mouseDown(with event: NSEvent) {
-//        1、首先判断是否在已经的框框上面了
-//        1.0 没有子view 就做有关的框框
-//        1.1、有： 就可以聚焦扩展
-//        1.2、没有：就添加新的内容 （线实现新的内容） ——> 2步骤： 添加新的views叠加
-//        2、
+        print("lt -- mouseDown super")
         if (self.editViewFinshed) {
             return
         }
@@ -270,16 +241,10 @@ class ScreenshotOverlayView: NSView {
             dragIng = true
         }
         needsDisplay = true
-        
-        if let pannel = self.areaPannel {
-            pannel.orderBack(nil)
-            pannel.setIsVisible(false)
-        }
     }
     
     override func mouseUp(with event: NSEvent) {
         if self.editViewFinshed {
-            self.addCustomSubviews()
             return
         }
 
@@ -287,8 +252,6 @@ class ScreenshotOverlayView: NSView {
         activeHandle = .none
         dragIng = false
         needsDisplay = true
-        
-        self.showEditCutBottomView()
     }
     
     override func mouseMoved(with event: NSEvent) {
@@ -317,48 +280,6 @@ class ScreenshotOverlayView: NSView {
                 NSCursor.crosshair.set()
             }
         }
-    }
-    
-    
-    var areaPannel: NSPanel?
-//    @AppStorage("EditCutHeight") var EditCutHeight:Int = 40
-//    @AppStorage("isEditCutSecondShow") var isEditCutSecondShow:Bool = false
-//    @ObservedObject var counterModel: CounterModel
-    @ObservedObject var editCutSecondItem : EditCutSecondShowModel
-
-    var EditCutHeight: Int {
-        if (editCutSecondItem.isEditCutSecondShow) {
-            return 85
-        }
-        else {
-            return 45
-        }
-    }
-    
-    func showEditCutBottomView() {
-        if (areaPannel == nil) {
-            let contentView = NSHostingView(rootView: EditCutBottomView())
-            contentView.frame = NSRect(x: selectionRect!.origin.x + selectionRect!.size.width - 340 , y:selectionRect!.origin.y - CGFloat(self.EditCutHeight), width: contentView.frame.size.width, height: contentView.frame.size.height)
-            contentView.focusRingType = .none
-            let areaPanel = EditCutBottomPanel(contentRect: contentView.frame, styleMask: [.fullSizeContentView], backing: .buffered, defer: false)
-            areaPanel.collectionBehavior = [.canJoinAllSpaces]
-            areaPanel.setFrame(contentView.frame, display: true)
-            areaPanel.level = .screenSaver
-            areaPanel.title = "编辑图片"
-            areaPanel.contentView = contentView
-            areaPanel.backgroundColor = .clear
-            areaPanel.titleVisibility = .hidden
-            areaPanel.isReleasedWhenClosed = false
-            areaPanel.titlebarAppearsTransparent = true
-            areaPanel.isMovableByWindowBackground = true
-            areaPanel.orderFront(nil)
-            self.areaPannel =  areaPanel
-        }
-        else {
-            self.areaPannel!.setFrameOrigin(NSMakePoint(selectionRect!.origin.x + selectionRect!.size.width - 340 , selectionRect!.origin.y - CGFloat(self.EditCutHeight)))
-            self.areaPannel!.orderFront(self)
-        }
-        self.areaPannel!.setIsVisible(true)
     }
 }
 
